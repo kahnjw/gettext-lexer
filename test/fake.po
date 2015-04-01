@@ -1,0 +1,79 @@
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-17 22:51+0000\n"
+"PO-Revision-Date: 2015-03-18 18:35+0000\n"
+"Last-Translator: Daniel Vieira <daniel@synthasite.com>\n"
+"Language-Team: Spanish "
+"<http://weblate.yola.net/projects/sitelocation/sitelocation/es/>\n"
+"Language: es\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 1.5\n"
+
+msgid "Address"
+msgstr "Dirección"
+
+msgid "Call"
+msgstr "Llamar"
+
+msgid "Close"
+msgstr "Cerrar"
+
+msgid "Current Location"
+msgstr "Ubicación actual"
+
+msgid "Currently closed"
+msgstr "Cerrado de momento"
+
+msgid "Day"
+msgstr "Día"
+
+msgid "Friday"
+msgstr "Viernes"
+
+msgid "Hours"
+msgstr "Horas"
+
+msgid "Map"
+msgstr "Mapa"
+
+msgid "Monday"
+msgstr "Lunes"
+
+msgid "Open"
+msgstr "Abierto"
+
+msgid "Open now"
+msgstr "Abrir ahora"
+
+msgid "Open today from %s to %s"
+msgstr "Abrir hoy de %s a %s"
+
+msgid "Phone"
+msgstr "Teléfono"
+
+msgid "Saturday"
+msgstr "Sábado"
+
+msgid "Sunday"
+msgstr "Domingo"
+
+msgid "This Week"
+msgstr "Esta semana"
+
+msgid "Thursday"
+msgstr "Jueves"
+
+msgid "Today"
+msgstr "Hoy"
+
+msgid "Today's Hours"
+msgstr "Horas para el día de hoy"
+
+msgid "Tuesday"
+msgstr "Martes"
+
+msgid "Wednesday"
+msgstr "Miércoles"
