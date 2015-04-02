@@ -156,6 +156,7 @@ void parse(const FunctionCallbackInfo<Value>& args) {
     print_token_array(tokens, ntokens);
     free_token_array(tokens, ntokens);
     free(po_string);
+    free(buffer);
 }
 
 void Init(Handle<Object> exports) {
