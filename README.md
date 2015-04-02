@@ -1,3 +1,3 @@
 # gettext-lexer
 
-Experimental gettext parser written a C and C++. Use at your own risk.
+Experimental gettext parser for nodejs written in C/C++. Use at your own risk.
