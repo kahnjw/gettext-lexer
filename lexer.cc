@@ -99,7 +99,7 @@ void free_token_array(struct Token * token_array, int size)
     token_array = NULL;
 }
 
-Token * parse(struct Token * tokens, char * po_string, int * size)
+struct Token * parse(struct Token * tokens, char * po_string, int * size)
 {
     bool escaped;
     char chr;
