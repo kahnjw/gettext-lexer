@@ -2,7 +2,7 @@
   "targets": [
     {
       "target_name": "gettext-lexer",
-      "sources": [ "gettextlexer.cc", "lexer.c" ]
+      "sources": [ "gettextlexer.cc", "lexer.cc" ]
     }
   ]
 }
