@@ -30,7 +30,7 @@ void parse(const FunctionCallbackInfo<Value>& args) {
     bool escaped = false;
     char chr;
     char quote;
-    int i;
+    size_t i;
     int ntokens;
     int state = NONESTATE;
     struct Token * tokens;
@@ -64,7 +64,7 @@ void parse(const FunctionCallbackInfo<Value>& args) {
     po_string = v8StrToCharStar(args[0]);
     catalog_str = args[0]->ToString();
 
-    for (i = 0; i < catalog_str->Length(); i++) {
+    for (i = 0; i < strlen(po_string); i++) {
         chr = po_string[i];
 
         switch(state) {
