@@ -57,7 +57,7 @@ struct Token * append(struct Token * tok_arr, int ntokens, int type, char quote,
     if (val != NULL)
         tok_arr[ntokens].value = copy_str(val);
     else
-        tok_arr[ntokens].value = val;
+        tok_arr[ntokens].value = NULL;
 
     return tok_arr;
 }
