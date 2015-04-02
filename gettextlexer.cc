@@ -44,7 +44,6 @@ void parse(const FunctionCallbackInfo<Value>& args) {
 
     Isolate* isolate = Isolate::GetCurrent();
     Local<Object> catalog_obj;
-    Local<String> catalog_str;
 
     HandleScope scope(isolate);
 
@@ -62,7 +61,6 @@ void parse(const FunctionCallbackInfo<Value>& args) {
 
     catalog_obj = Object::New(isolate);
     po_string = v8StrToCharStar(args[0]);
-    catalog_str = args[0]->ToString();
 
     for (i = 0; i < strlen(po_string); i++) {
         chr = po_string[i];
