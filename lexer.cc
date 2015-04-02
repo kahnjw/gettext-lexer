@@ -2,6 +2,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <fstream>
+
+/* Type Definitions */
+#define COMMENTTYPE 0x01
+#define KEYTYPE 0x02
+#define STRINGTYPE 0x03
+
+/* State definitions */
+#define NONESTATE 0x01
+#define COMMENTSTATE 0x02
+#define KEYSTATE 0x03
+#define STRINGSTATE 0x04
 
 
 char * copy_str (char * from)
@@ -85,4 +97,109 @@ void free_token_array(struct Token * token_array, int size)
         free(token_array[i].value);
     free(token_array);
     token_array = NULL;
+}
+
+Token * parse(struct Token * tokens, char * po_string, int * size)
+{
+    bool escaped;
+    char chr;
+    char quote;
+    size_t i;
+    int ntokens;
+    int state;
+    char * buffer;
+
+    buffer = NULL;
+    tokens = NULL;
+    ntokens = 0;
+    quote = '\0';
+    escaped = false;
+    state = NONESTATE;
+
+    for (i = 0; i < strlen(po_string); i++) {
+        chr = po_string[i];
+
+        switch(state) {
+            case NONESTATE:
+                if (chr == '\'' || chr == '"') {
+                    state = STRINGSTATE;
+                    quote = chr;
+                } else if (chr == '#') {
+                    state = COMMENTSTATE;
+                } else if (!isspace(chr)) {
+                    state = KEYSTATE;
+                    buffer = append_to_buffer(buffer, chr);
+                } else if (isspace(chr) && buffer != NULL) {
+                    tokens = append(tokens, ntokens, KEYTYPE, '\0', buffer);
+                    free(buffer);
+                    buffer = NULL;
+                    ++ntokens;
+                }
+
+                break;
+
+            case COMMENTSTATE:
+                if (chr == '\n') {
+                    tokens = append(tokens, ntokens, COMMENTTYPE, '\0', buffer);
+                    state = NONESTATE;
+                    free(buffer);
+                    buffer = NULL;
+                    ++ntokens;
+                } else if (chr != '\r') {
+                    buffer = append_to_buffer(buffer, chr);
+                }
+
+                break;
+
+            case STRINGSTATE:
+                if(escaped) {
+                    switch(chr) {
+                        case 't':
+                            buffer = append_to_buffer(buffer, '\t');
+                            break;
+
+                        case 'n':
+                            buffer = append_to_buffer(buffer, '\n');
+                            break;
+
+                        case 'r':
+                            buffer = append_to_buffer(buffer, '\r');
+                            break;
+                    }
+
+                    escaped = false;
+
+                } else {
+                    if(chr == quote) {
+                        tokens = append(tokens, ntokens, STRINGTYPE, quote, buffer);
+                        free(buffer);
+                        buffer = NULL;
+                        state = NONESTATE;
+                        ++ntokens;
+                    } else if (chr == '\\') {
+                        escaped = true;
+                        break;
+                    } else {
+                        buffer = append_to_buffer(buffer, chr);
+                    }
+                    escaped = false;
+                }
+
+                break;
+
+            case KEYSTATE:
+                if(isalpha(chr) || chr == '-' || chr == '[' || chr == ']') {
+                    buffer = append_to_buffer(buffer, chr);
+                } else {
+                    state = NONESTATE;
+                    --i;
+                }
+
+                break;
+        }
+    }
+
+    *size = ntokens;
+    free(buffer);
+    return tokens;
 }

@@ -5,17 +5,6 @@
 #include <fstream>
 #include <string.h>
 
-/* Type Definitions */
-#define COMMENTTYPE 0x01
-#define KEYTYPE 0x02
-#define STRINGTYPE 0x03
-
-/* State definitions */
-#define NONESTATE 0x01
-#define COMMENTSTATE 0x02
-#define KEYSTATE 0x03
-#define STRINGSTATE 0x04
-
 using namespace v8;
 
 
@@ -26,21 +15,15 @@ char *v8StrToCharStar(v8::Local<v8::Value> value) {
     return str;
 }
 
-void parse(const FunctionCallbackInfo<Value>& args) {
-    bool escaped = false;
-    char chr;
-    char quote;
-    size_t i;
+void binder(const FunctionCallbackInfo<Value>& args)
+{
     int ntokens;
-    int state = NONESTATE;
-    struct Token * tokens;
+    int * ntokens_ptr;
     char * po_string;
-    char * buffer;
+    struct Token * tokens;
 
-    buffer = NULL;
     tokens = NULL;
-    ntokens = 0;
-    quote = '\0';
+    ntokens_ptr = &ntokens;
 
     Isolate* isolate = Isolate::GetCurrent();
     Local<Object> catalog_obj;
@@ -61,89 +44,7 @@ void parse(const FunctionCallbackInfo<Value>& args) {
 
     catalog_obj = Object::New(isolate);
     po_string = v8StrToCharStar(args[0]);
-
-    for (i = 0; i < strlen(po_string); i++) {
-        chr = po_string[i];
-
-        switch(state) {
-            case NONESTATE:
-                if (chr == '\'' || chr == '"') {
-                    state = STRINGSTATE;
-                    quote = chr;
-                } else if (chr == '#') {
-                    state = COMMENTSTATE;
-                } else if (!isspace(chr)) {
-                    state = KEYSTATE;
-                    buffer = append_to_buffer(buffer, chr);
-                } else if (isspace(chr) && buffer != NULL) {
-                    tokens = append(tokens, ntokens, KEYTYPE, '\0', buffer);
-                    free(buffer);
-                    buffer = NULL;
-                    ++ntokens;
-                }
-
-                break;
-
-            case COMMENTSTATE:
-                if (chr == '\n') {
-                    tokens = append(tokens, ntokens, COMMENTTYPE, '\0', buffer);
-                    state = NONESTATE;
-                    free(buffer);
-                    buffer = NULL;
-                    ++ntokens;
-                } else if (chr != '\r') {
-                    buffer = append_to_buffer(buffer, chr);
-                }
-
-                break;
-
-            case STRINGSTATE:
-                if(escaped) {
-                    switch(chr) {
-                        case 't':
-                            buffer = append_to_buffer(buffer, '\t');
-                            break;
-
-                        case 'n':
-                            buffer = append_to_buffer(buffer, '\n');
-                            break;
-
-                        case 'r':
-                            buffer = append_to_buffer(buffer, '\r');
-                            break;
-                    }
-
-                    escaped = false;
-
-                } else {
-                    if(chr == quote) {
-                        tokens = append(tokens, ntokens, STRINGTYPE, quote, buffer);
-                        free(buffer);
-                        buffer = NULL;
-                        state = NONESTATE;
-                        ++ntokens;
-                    } else if (chr == '\\') {
-                        escaped = true;
-                        break;
-                    } else {
-                        buffer = append_to_buffer(buffer, chr);
-                    }
-                    escaped = false;
-                }
-
-                break;
-
-            case KEYSTATE:
-                if(isalpha(chr) || chr == '-' || chr == '[' || chr == ']') {
-                    buffer = append_to_buffer(buffer, chr);
-                } else {
-                    state = NONESTATE;
-                    --i;
-                }
-
-                break;
-        }
-    }
+    tokens = parse(tokens, po_string, ntokens_ptr);
 
     args.GetReturnValue().Set(catalog_obj);
 
@@ -151,11 +52,10 @@ void parse(const FunctionCallbackInfo<Value>& args) {
     free_token_array(tokens, ntokens);
 
     free(po_string);
-    free(buffer);
 }
 
 void Init(Handle<Object> exports) {
-    NODE_SET_METHOD(exports, "parse", parse);
+    NODE_SET_METHOD(exports, "parse", binder);
 }
 
 NODE_MODULE(gettextlexer, Init)
