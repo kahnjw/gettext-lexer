@@ -1,17 +1,15 @@
+#include "lexer.h"
 #include <node.h>
 #include <iostream>
 #include <stdio.h>
 #include <fstream>
 #include <string>
 #include <string.h>
-#include "lexer.h"
-
-using namespace v8;
 
 /* Type Definitions */
-#define STRINGTYPE 0x03
 #define COMMENTTYPE 0x01
 #define KEYTYPE 0x02
+#define STRINGTYPE 0x03
 
 /* State definitions */
 #define NONESTATE 0x01
@@ -19,6 +17,7 @@ using namespace v8;
 #define KEYSTATE 0x03
 #define STRINGSTATE 0x04
 
+using namespace v8;
 
 
 char *v8StrToCharStar(v8::Local<v8::Value> value) {
