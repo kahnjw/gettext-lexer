@@ -32,6 +32,7 @@ char *v8StrToCharStar(v8::Local<v8::Value> value) {
 void parse(const FunctionCallbackInfo<Value>& args) {
     bool escaped = false;
     char chr;
+    char quote;
     int i;
     int ntokens;
     int state = NONESTATE;
@@ -42,6 +43,7 @@ void parse(const FunctionCallbackInfo<Value>& args) {
     buffer = NULL;
     tokens = NULL;
     ntokens = 0;
+    quote = '\0';
 
     Isolate* isolate = Isolate::GetCurrent();
     Local<Object> catalog_obj;
@@ -72,8 +74,7 @@ void parse(const FunctionCallbackInfo<Value>& args) {
             case NONESTATE:
                 if (chr == '\'' || chr == '"') {
                     state = STRINGSTATE;
-                    tokens = append(tokens, ntokens, STRINGTYPE, chr, NULL);
-                    ++ntokens;
+                    quote = chr;
                 } else if (chr == '#') {
                     state = COMMENTSTATE;
                     tokens = append(tokens, ntokens, COMMENTTYPE, '\0', NULL);
