@@ -119,8 +119,12 @@ void parse(const FunctionCallbackInfo<Value>& args) {
                     escaped = false;
 
                 } else {
-                    if(chr == '\'' || chr == '"') {
+                    if(chr == quote) {
+                        tokens = append(tokens, ntokens, STRINGTYPE, quote, buffer);
+                        free(buffer);
+                        buffer = NULL;
                         state = NONESTATE;
+                        ++ntokens;
                     } else if (chr == '\\') {
                         escaped = true;
                         break;
