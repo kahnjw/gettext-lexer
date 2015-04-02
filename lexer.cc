@@ -1,7 +1,8 @@
+#include "lexer.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "lexer.h"
+
 
 char * copy_str (char * from)
 {
@@ -68,6 +69,7 @@ void print_token_array(struct Token * token_array, int size)
     printf("Tokens in array: %d\n", size);
     for(i = 0; i < size; ++i) {
         printf("--------------------------------\n");
+        printf("Token: %d\n", i);
         printf("Type: %d\n", token_array[i].type);
         printf("Quote: %d\n", token_array[i].quote);
         printf("Value: %s\n", token_array[i].value);
@@ -82,4 +84,5 @@ void free_token_array(struct Token * token_array, int size)
     for(i = 0; i < size; ++i)
         free(token_array[i].value);
     free(token_array);
+    token_array = NULL;
 }
