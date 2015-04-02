@@ -80,8 +80,8 @@ void parse(const FunctionCallbackInfo<Value>& args) {
                     ++ntokens;
                 } else if (!isspace(chr)) {
                     state = KEYSTATE;
-                    buffer = append_to_buffer(NULL, chr);
-                } else if (isspace(chr)) {
+                    buffer = append_to_buffer(buffer, chr);
+                } else if (isspace(chr) && buffer != NULL) {
                     tokens = append(tokens, ntokens, KEYTYPE, '\0', buffer);
                     free(buffer);
                     buffer = NULL;
