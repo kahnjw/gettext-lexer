@@ -19,7 +19,6 @@ using namespace v8;
 #define KEYSTATE 0x03
 #define STRINGSTATE 0x04
 
-#define VALLENGTH 100
 
 
 char *v8StrToCharStar(v8::Local<v8::Value> value) {
