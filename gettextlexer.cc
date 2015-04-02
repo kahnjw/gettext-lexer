@@ -92,7 +92,11 @@ void parse(const FunctionCallbackInfo<Value>& args) {
 
             case COMMENTSTATE:
                 if (chr == '\n') {
+                    tokens = append(tokens, ntokens, COMMENTTYPE, '\0', buffer);
                     state = NONESTATE;
+                    free(buffer);
+                    buffer = NULL;
+                    ++ntokens;
                 } else if (chr != '\r') {
                     buffer = append_to_buffer(buffer, chr);
                 }
