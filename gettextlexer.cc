@@ -24,6 +24,7 @@ void binder(const FunctionCallbackInfo<Value>& args)
 
     tokens = NULL;
     ntokens_ptr = &ntokens;
+    ntokens = 0;
 
     Isolate* isolate = Isolate::GetCurrent();
     Local<Object> catalog_obj;
