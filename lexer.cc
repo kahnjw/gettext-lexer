@@ -153,18 +153,12 @@ Token * parse(struct Token * tokens, char * po_string, int * size)
 
             case STRINGSTATE:
                 if(escaped) {
-                    switch(chr) {
-                        case 't':
-                            buffer = append_to_buffer(buffer, '\t');
-                            break;
-
-                        case 'n':
-                            buffer = append_to_buffer(buffer, '\n');
-                            break;
-
-                        case 'r':
-                            buffer = append_to_buffer(buffer, '\r');
-                            break;
+                    if (chr == 't') {
+                        buffer = append_to_buffer(buffer, '\t');
+                    } else if (chr == 'n') {
+                        buffer = append_to_buffer(buffer, '\n');
+                    } else if (chr == 'r') {
+                        buffer = append_to_buffer(buffer, '\r');
                     }
 
                     escaped = false;
