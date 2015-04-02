@@ -26,7 +26,7 @@ char * append_to_buffer(char * buffer, char chr)
         buffer = (char *)malloc(1);
     else {
         buffer_length = strlen(buffer);
-        buffer = (char *)realloc(buffer, buffer_length + 1);
+        buffer = (char *)realloc(buffer, buffer_length + 2);
     }
 
     buffer[buffer_length] = chr;
