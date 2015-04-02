@@ -1,4 +1,3 @@
-// addon.cc
 #include <node.h>
 #include <iostream>
 #include <stdio.h>
