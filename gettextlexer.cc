@@ -74,8 +74,6 @@ void parse(const FunctionCallbackInfo<Value>& args) {
                     quote = chr;
                 } else if (chr == '#') {
                     state = COMMENTSTATE;
-                    tokens = append(tokens, ntokens, COMMENTTYPE, '\0', NULL);
-                    ++ntokens;
                 } else if (!isspace(chr)) {
                     state = KEYSTATE;
                     buffer = append_to_buffer(buffer, chr);
@@ -150,8 +148,10 @@ void parse(const FunctionCallbackInfo<Value>& args) {
     }
 
     args.GetReturnValue().Set(catalog_obj);
+
     print_token_array(tokens, ntokens);
     free_token_array(tokens, ntokens);
+
     free(po_string);
     free(buffer);
 }
