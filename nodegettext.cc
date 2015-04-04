@@ -7,6 +7,15 @@
 using namespace v8;
 
 
+char * null_helper(char * str)
+{
+    if(!strcmp(str, "null")) {
+        return NULL;
+    }
+
+    return str;
+}
+
 char * v8StrToCharStar(v8::Local<v8::Value> value)
 {
     v8::String::Utf8Value string(value);
@@ -27,15 +36,6 @@ int v8StrToInt(v8::Local<v8::Value> value)
     free(str);
 
     return integer;
-}
-
-char * null_helper(char * str)
-{
-    if(!strcmp(str, "null")) {
-        return NULL;
-    }
-
-    return str;
 }
 
 void _bindtextdomain(const FunctionCallbackInfo<Value>& args)
