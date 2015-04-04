@@ -2,6 +2,7 @@
 #include <libintl.h>
 #include <node.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 using namespace v8;
