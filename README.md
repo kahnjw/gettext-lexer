@@ -1,3 +1,3 @@
-# gettext-lexer
+# node-gettext
 
-Experimental gettext parser for nodejs written in C/C++. Use at your own risk.
+A Javascript binding for [GNU Gettext](https://www.gnu.org/software/gettext/).
