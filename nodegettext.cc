@@ -10,7 +10,7 @@ using namespace v8;
 
 char * null_helper(char * str)
 {
-    if(!std::strcmp(str, "null")) {
+    if(!strcmp(str, "null")) {
         return NULL;
     }
 
