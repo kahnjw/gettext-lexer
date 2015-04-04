@@ -10,7 +10,7 @@ using namespace v8;
 
 char * null_helper(char * str)
 {
-    if(!strcmp(str, "null")) {
+    if(!std::strcmp(str, "null")) {
         return NULL;
     }
 
@@ -20,8 +20,8 @@ char * null_helper(char * str)
 char * v8StrToCharStar(v8::Local<v8::Value> value)
 {
     v8::String::Utf8Value string(value);
-    char *str = (char *) malloc(string.length() + 1);
-    strcpy(str, *string);
+    char *str = (char *) std::malloc(string.length() + 1);
+    std::strcpy(str, *string);
 
     return str;
 }
@@ -32,7 +32,7 @@ int v8StrToInt(v8::Local<v8::Value> value)
     char * str;
 
     str = v8StrToCharStar(value);
-    integer = atoi(str);
+    integer = std::atoi(str);
 
     free(str);
 
