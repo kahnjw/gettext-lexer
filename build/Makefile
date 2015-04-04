@@ -329,12 +329,12 @@ $(obj).$(TOOLSET)/%.o: $(obj)/%.s FORCE_DO_CMD
 
 ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
     $(findstring $(join ^,$(prefix)),\
-                 $(join ^,gettext-lexer.target.mk)))),)
-  include gettext-lexer.target.mk
+                 $(join ^,nodegettext.target.mk)))),)
+  include nodegettext.target.mk
 endif
 
 quiet_cmd_regen_makefile = ACTION Regenerating $@
-cmd_regen_makefile = cd $(srcdir); /Users/jarrodkahn/projects/gettext-lexer/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "--toplevel-dir=." -I/Users/jarrodkahn/projects/gettext-lexer/build/config.gypi -I/Users/jarrodkahn/projects/gettext-lexer/node_modules/node-gyp/addon.gypi -I/Users/jarrodkahn/.node-gyp/0.12.0/common.gypi "--depth=." "-Goutput_dir=." "--generator-output=build" "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/Users/jarrodkahn/.node-gyp/0.12.0" "-Dmodule_root_dir=/Users/jarrodkahn/projects/gettext-lexer" binding.gyp
+cmd_regen_makefile = cd $(srcdir); /Users/jarrodkahn/projects/node-gettext/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "--toplevel-dir=." -I/Users/jarrodkahn/projects/node-gettext/build/config.gypi -I/Users/jarrodkahn/projects/node-gettext/node_modules/node-gyp/addon.gypi -I/Users/jarrodkahn/.node-gyp/0.12.0/common.gypi "--depth=." "-Goutput_dir=." "--generator-output=build" "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/Users/jarrodkahn/.node-gyp/0.12.0" "-Dmodule_root_dir=/Users/jarrodkahn/projects/node-gettext" binding.gyp
 Makefile: $(srcdir)/../../.node-gyp/0.12.0/common.gypi $(srcdir)/node_modules/node-gyp/addon.gypi $(srcdir)/build/config.gypi $(srcdir)/binding.gyp
 	$(call do_cmd,regen_makefile)
 

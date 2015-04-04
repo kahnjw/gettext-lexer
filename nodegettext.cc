@@ -1,10 +1,10 @@
 #include <node.h>
 #include <iostream>
 #include <stdio.h>
-#include <libintl.h>
 #include <fstream>
 #include <string.h>
 #include <errno.h>
+#include <libintl.h>
 
 using namespace v8;
 

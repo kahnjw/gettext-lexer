@@ -1,0 +1,77 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-17 22:51+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Address"
+msgstr ""
+
+msgid "Call"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Current Location"
+msgstr ""
+
+msgid "Currently closed"
+msgstr ""
+
+msgid "Day"
+msgstr ""
+
+msgid "Friday"
+msgstr ""
+
+msgid "Hours"
+msgstr ""
+
+msgid "Map"
+msgstr ""
+
+msgid "Monday"
+msgstr ""
+
+msgid "Open"
+msgstr ""
+
+msgid "Open now"
+msgstr ""
+
+msgid "Open today from %s to %s"
+msgstr ""
+
+msgid "Phone"
+msgstr ""
+
+msgid "Saturday"
+msgstr ""
+
+msgid "Sunday"
+msgstr ""
+
+msgid "This Week"
+msgstr ""
+
+msgid "Thursday"
+msgstr ""
+
+msgid "Today"
+msgstr ""
+
+msgid "Today's Hours"
+msgstr ""
+
+msgid "Tuesday"
+msgstr ""
+
+msgid "Wednesday"
+msgstr ""

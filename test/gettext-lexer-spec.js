@@ -1,11 +1,11 @@
 var path = require('path');
 var chai = require('chai');
-var gettext = require('gettext-parser');
-var gt = require('../build/Release/gettext-lexer');
+var gt = require('../build/Release/nodegettext');
 
 var expect = chai.expect;
 
-describe('gettext lexer', function() {
+
+describe('gettext', function() {
 
   var dirName = path.join(__dirname, 'locale');
   var domainName = 'messages';

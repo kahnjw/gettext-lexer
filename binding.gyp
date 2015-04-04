@@ -1,9 +1,9 @@
 {
   "targets": [
     {
-      "target_name": "gettext-lexer",
+      "target_name": "nodegettext",
       "sources": [
-        "gettextlexer.cc"
+        "nodegettext.cc"
       ],
       "link_settings": {
         "libraries": ["libintl.8.dylib"]
