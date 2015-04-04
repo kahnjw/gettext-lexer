@@ -1,7 +1,5 @@
 #include <node.h>
-#include <iostream>
 #include <stdio.h>
-#include <fstream>
 #include <string.h>
 #include <errno.h>
 #include <libintl.h>
