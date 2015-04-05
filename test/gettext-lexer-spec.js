@@ -9,7 +9,7 @@ describe('gettext', function() {
 
   var dirName = path.join(__dirname, 'locale');
   var domainName = 'messages';
-  var locale = 'pt_BR';
+  var locale = 'pt_BR.UTF-8';
   var lcType = '';
   var expected;
 

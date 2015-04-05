@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <libintl.h>
+#include <locale.h>
 #include <node.h>
 #include <stdio.h>
 #include <string.h>
@@ -71,9 +72,10 @@ void _bindtextdomain(const FunctionCallbackInfo<Value>& args)
     dir_name = v8StrToCharStar(args[1]);
 
     if((returned_dir_name = bindtextdomain(domain_name, dir_name)) == NULL) {
-        printf("Ran out of memory during call to bindtextdomain()\n");
-        printf("ERROR: %s\n", strerror(errno));
-        exit(1);
+        isolate->ThrowException(Exception::Error(
+            String::NewFromUtf8(
+		isolate, "Ran out of memory during bindtextdomain")));
+        return;
     }
 
     args.GetReturnValue().Set(String::NewFromUtf8(isolate, returned_dir_name));
@@ -150,8 +152,10 @@ void _setlocale(const FunctionCallbackInfo<Value>& args)
     lc_code = null_helper(lc_code);
 
     if((returned_lc_code = setlocale(lc_type, lc_code)) == NULL) {
-        printf("Invalid locale code given: %s\n", lc_code);
-        exit(1);
+	isolate->ThrowException(Exception::Error
+	    (String::NewFromUtf8(
+	        isolate, "Invalid locale code given")));
+	return;
     }
 
     args.GetReturnValue().Set(String::NewFromUtf8(isolate, returned_lc_code));
